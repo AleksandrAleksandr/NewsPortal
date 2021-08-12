@@ -1,4 +1,4 @@
-package com.example.newsportal.view
+package com.example.newsportal.app.topnews
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.newsportal.NewsAdapter
+import com.example.newsportal.utils.NewsAdapter
 import com.example.newsportal.R
-import com.example.newsportal.model.ArticleLocal
-import com.example.newsportal.viewmodel.NewsViewModel
+import com.example.newsportal.data.local.model.ArticleLocal
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class CategoryFragment : Fragment() {

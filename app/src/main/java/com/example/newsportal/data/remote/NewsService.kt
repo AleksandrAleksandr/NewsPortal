@@ -1,6 +1,6 @@
-package com.example.newsportal.network
+package com.example.newsportal.data.remote
 
-import com.example.newsportal.model.NewsResponce
+import com.example.newsportal.data.remote.model.NewsResponce
 import retrofit2.http.GET
 import retrofit2.http.Query
 

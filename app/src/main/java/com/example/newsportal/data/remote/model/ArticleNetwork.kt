@@ -1,7 +1,7 @@
-package com.example.newsportal.model
+package com.example.newsportal.data.remote.model
 
 
-data class Article(
+data class ArticleNetwork(
     val source: Source,
     val author: String,
     val title: String,
@@ -11,3 +11,5 @@ data class Article(
     val publishedAt: String,
     val content: String,
 )
+
+

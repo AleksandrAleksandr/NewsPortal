@@ -1,8 +1,8 @@
-package com.example.newsportal.viewmodel
+package com.example.newsportal.app.topnews
 
 import androidx.lifecycle.*
 import androidx.lifecycle.ViewModel
-import com.example.newsportal.repository.NewsRepository
+import com.example.newsportal.data.NewsRepository
 import kotlinx.coroutines.launch
 
 class NewsViewModel constructor(

@@ -2,11 +2,11 @@ package com.example.newsportal.di
 
 import android.app.Application
 import androidx.room.Room
-import com.example.newsportal.repository.NewsRepository
-import com.example.newsportal.network.NewsService
-import com.example.newsportal.room.Database
-import com.example.newsportal.room.NewsDao
-import com.example.newsportal.viewmodel.NewsViewModel
+import com.example.newsportal.data.NewsRepository
+import com.example.newsportal.data.remote.NewsService
+import com.example.newsportal.data.local.Database
+import com.example.newsportal.data.local.NewsDao
+import com.example.newsportal.app.topnews.NewsViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

@@ -1,4 +1,4 @@
-package com.example.newsportal.view
+package com.example.newsportal.app.topnews
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import com.example.newsportal.R
-import com.example.newsportal.viewmodel.NewsViewModel
 import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val NUM_PAGES = 7
 
-class TopHeadlineFragment : Fragment() {
+class TopNewsFragment : Fragment() {
 
     private val viewModel: NewsViewModel by viewModel()
     private lateinit var mPager: ViewPager

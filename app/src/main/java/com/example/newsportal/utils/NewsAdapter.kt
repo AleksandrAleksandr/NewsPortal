@@ -1,4 +1,4 @@
-package com.example.newsportal
+package com.example.newsportal.utils
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.newsportal.model.ArticleLocal
+import com.example.newsportal.R
+import com.example.newsportal.data.local.model.ArticleLocal
 import com.squareup.picasso.Picasso
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ItemViewHolder>() {

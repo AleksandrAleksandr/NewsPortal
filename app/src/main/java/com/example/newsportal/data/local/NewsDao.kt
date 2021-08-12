@@ -1,11 +1,11 @@
-package com.example.newsportal.room
+package com.example.newsportal.data.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.newsportal.model.ArticleLocal
+import com.example.newsportal.data.local.model.ArticleLocal
 
 @Dao
 interface NewsDao {

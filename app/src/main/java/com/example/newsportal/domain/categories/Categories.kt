@@ -1,4 +1,4 @@
-package com.example.newsportal.categories
+package com.example.newsportal.domain.categories
 
 enum class Categories {
     sports,

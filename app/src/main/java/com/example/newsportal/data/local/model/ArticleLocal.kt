@@ -1,4 +1,4 @@
-package com.example.newsportal.model
+package com.example.newsportal.data.local.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

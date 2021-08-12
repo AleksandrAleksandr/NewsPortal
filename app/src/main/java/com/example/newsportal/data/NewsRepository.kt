@@ -1,9 +1,9 @@
-package com.example.newsportal.repository
+package com.example.newsportal.data
 
-import com.example.newsportal.categories.Categories
-import com.example.newsportal.model.ArticleLocal
-import com.example.newsportal.network.NewsService
-import com.example.newsportal.room.NewsDao
+import com.example.newsportal.domain.categories.Categories
+import com.example.newsportal.data.local.NewsDao
+import com.example.newsportal.data.remote.NewsService
+import com.example.newsportal.data.local.model.ArticleLocal
 
 class NewsRepository(private val mService: NewsService, private val newsDao: NewsDao) {
 
