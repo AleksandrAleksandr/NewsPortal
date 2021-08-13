@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ItemViewHolder>() {
 
-    private var data: MutableList<ArticleLocal> = mutableListOf()
+    private var data = listOf<ArticleLocal>()
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.item_title)
@@ -33,8 +33,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ItemViewHolder>() {
     override fun getItemCount() = data.size
 
     fun setData(heroes: List<ArticleLocal>) {
-        data.clear()
-        data.addAll(heroes)
+        data = heroes
         notifyDataSetChanged()
     }
 }

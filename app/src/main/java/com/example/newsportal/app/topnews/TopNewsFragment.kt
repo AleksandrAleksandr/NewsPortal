@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val NUM_PAGES = 7
+const val CATEGORY_KEY = "key"
 
 class TopNewsFragment : Fragment() {
 
@@ -39,15 +40,14 @@ class TopNewsFragment : Fragment() {
     }
 
 
-    private inner class PagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager,BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private inner class PagerAdapter(
+        fragmentManager: FragmentManager
+    ) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         override fun getCount() = NUM_PAGES
 
         override fun getItem(position: Int): Fragment {
-            val fragment = CategoryFragment()
-            fragment.arguments = Bundle().apply {
-                putString("key", resources.getStringArray(R.array.categories)[position])
-            }
-            return fragment
+            val category = resources.getStringArray(R.array.categories)[position]
+            return CategoryFragment.newInstance(category)
         }
 
 

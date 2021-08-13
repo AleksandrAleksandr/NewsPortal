@@ -15,7 +15,7 @@ class CategoryFragment : Fragment() {
 
     //private val viewModel: NewsViewModel by viewModels({requireParentFragment()})
     private val viewModel: NewsViewModel by lazy { requireParentFragment().getViewModel<NewsViewModel>() }
-    lateinit var category: String
+    private val category: String by lazy { requireArguments().getString(CATEGORY_KEY, "general") }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,20 +28,27 @@ class CategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arguments?.takeIf { it.containsKey("key") }?.apply {
-            category = getString("key", "sports")
+        val recyclerView: RecyclerView = view.findViewById(R.id.rv)
+        val adapter = NewsAdapter()
+        recyclerView.adapter = adapter
 
-            val recyclerView: RecyclerView = view.findViewById(R.id.rv)
-            val adapter = NewsAdapter()
-            recyclerView.adapter = adapter
+        viewModel.data.observe(viewLifecycleOwner, {
+            adapter.setData(filteredNews(it))
+        })
 
-            viewModel.data.observe(viewLifecycleOwner, {
-                adapter.setData(filteredNews(it))
-            })
-        }
     }
 
     private fun filteredNews(news: List<ArticleLocal>) =
         news.filter { it.category == category }
+
+    companion object {
+        fun newInstance(category: String): CategoryFragment {
+            val fragment = CategoryFragment()
+            fragment.arguments = Bundle().apply {
+                putString(CATEGORY_KEY, category)
+            }
+            return fragment
+        }
+    }
 
 }
