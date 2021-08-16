@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.newsportal.data.NewsRepository
 import kotlinx.coroutines.launch
 
-class NewsViewModel constructor(
+class NewsViewModel (
     private val mRepository: NewsRepository
 ): ViewModel() {
 

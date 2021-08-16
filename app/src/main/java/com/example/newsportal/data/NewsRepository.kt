@@ -14,13 +14,13 @@ class NewsRepository(private val mService: NewsService, private val newsDao: New
             val news = mService.getTopNewsByCategory(elem.name).articles?.map {
                 ArticleLocal(
                     category = elem.name,
-                    author = it.author,
-                    title = it.title,
-                    description = it.description,
-                    url = it.url,
-                    urlToImage = it.urlToImage,
-                    publishedAt = it.publishedAt,
-                    content = it.content
+                    author = it.author.orEmpty(),
+                    title = it.title.orEmpty(),
+                    description = it.description.orEmpty(),
+                    url = it.url.orEmpty(),
+                    urlToImage = it.urlToImage.orEmpty(),
+                    publishedAt = it.publishedAt.orEmpty(),
+                    content = it.content.orEmpty()
                 )
             }
             news?.let { newsDao.add(it) }

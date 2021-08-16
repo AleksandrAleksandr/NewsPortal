@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsportal.utils.NewsAdapter
@@ -13,7 +14,6 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class CategoryFragment : Fragment() {
 
-    //private val viewModel: NewsViewModel by viewModels({requireParentFragment()})
     private val viewModel: NewsViewModel by lazy { requireParentFragment().getViewModel<NewsViewModel>() }
     private val category: String by lazy { requireArguments().getString(CATEGORY_KEY, "general") }
 
@@ -42,12 +42,12 @@ class CategoryFragment : Fragment() {
         news.filter { it.category == category }
 
     companion object {
+        private const val CATEGORY_KEY = "key"
+
         fun newInstance(category: String): CategoryFragment {
-            val fragment = CategoryFragment()
-            fragment.arguments = Bundle().apply {
-                putString(CATEGORY_KEY, category)
+            return CategoryFragment().apply {
+                arguments = bundleOf(CATEGORY_KEY to category)
             }
-            return fragment
         }
     }
 

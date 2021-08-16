@@ -13,7 +13,6 @@ import com.google.android.material.tabs.TabLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 const val NUM_PAGES = 7
-const val CATEGORY_KEY = "key"
 
 class TopNewsFragment : Fragment() {
 
