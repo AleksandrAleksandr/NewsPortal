@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.newsportal.utils.NewsAdapter
 import com.example.newsportal.data.local.model.ArticleLocal
 import com.example.newsportal.databinding.FragmentCategoryBinding
+import com.example.newsportal.domain.model.Article
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class CategoryFragment : Fragment() {
@@ -39,7 +40,7 @@ class CategoryFragment : Fragment() {
 
     }
 
-    private fun filteredNews(news: List<ArticleLocal>) =
+    private fun filteredNews(news: List<Article>) =
         news.filter { it.category == category }
 
     companion object {

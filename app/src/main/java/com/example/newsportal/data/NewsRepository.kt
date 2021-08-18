@@ -1,29 +1,30 @@
 package com.example.newsportal.data
 
+import com.example.newsportal.data.local.ILocalDataSource
 import com.example.newsportal.domain.categories.Categories
-import com.example.newsportal.data.local.NewsDao
-import com.example.newsportal.data.remote.NewsService
-import com.example.newsportal.data.local.model.ArticleLocal
+import com.example.newsportal.data.remote.IRemoteDataSource
+import com.example.newsportal.domain.INewsRepository
+import com.example.newsportal.domain.model.Article
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 
-class NewsRepository(private val mService: NewsService, private val newsDao: NewsDao) {
+class NewsRepository(
+    private val remoteSource: IRemoteDataSource,
+    private val localSource: ILocalDataSource,
+) : INewsRepository {
 
-    val data = newsDao.findAll()
+    private val data = localSource.getAllNews()
 
-    suspend fun refresh() {
+    private suspend fun refresh() {
         for (elem in Categories.values()) {
-            val news = mService.getTopNewsByCategory(elem.name).articles?.map {
-                ArticleLocal(
-                    category = elem.name,
-                    author = it.author.orEmpty(),
-                    title = it.title.orEmpty(),
-                    description = it.description.orEmpty(),
-                    url = it.url.orEmpty(),
-                    urlToImage = it.urlToImage.orEmpty(),
-                    publishedAt = it.publishedAt.orEmpty(),
-                    content = it.content.orEmpty()
-                )
-            }
-            news?.let { newsDao.add(it) }
+            val news = remoteSource.getNewsByCategory(elem.name)
+            localSource.insertNews(news)
         }
     }
+
+    override fun getNewsList(): Flow<List<Article>>  = flow {
+        refresh()
+        emitAll(data)
+    }
+
 }

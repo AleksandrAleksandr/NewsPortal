@@ -8,11 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsportal.R
 import com.example.newsportal.data.local.model.ArticleLocal
+import com.example.newsportal.domain.model.Article
 import com.squareup.picasso.Picasso
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ItemViewHolder>() {
 
-    private var data = listOf<ArticleLocal>()
+    private var data = listOf<Article>()
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.item_title)
@@ -32,7 +33,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ItemViewHolder>() {
 
     override fun getItemCount() = data.size
 
-    fun setData(heroes: List<ArticleLocal>) {
+    fun setData(heroes: List<Article>) {
         data = heroes
         notifyDataSetChanged()
     }
