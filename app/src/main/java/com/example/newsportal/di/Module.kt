@@ -3,10 +3,11 @@ package com.example.newsportal.di
 import android.app.Application
 import androidx.room.Room
 import com.example.newsportal.data.NewsRepository
-import com.example.newsportal.data.remote.NewsService
-import com.example.newsportal.data.local.Database
-import com.example.newsportal.data.local.NewsDao
 import com.example.newsportal.app.topnews.NewsViewModel
+import com.example.newsportal.data.local.*
+import com.example.newsportal.data.remote.*
+import com.example.newsportal.domain.INewsRepository
+import com.example.newsportal.domain.usecases.GetNewsUseCase
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -48,10 +49,16 @@ val databaseModule = module {
     single { provideDao(get()) }
 }
 
-val repositoryModule = module {
-    fun provideNewsRepository(apiService: NewsService, dao: NewsDao): NewsRepository {
-        return NewsRepository(apiService, dao)
-    }
+val domainModule = module {
+    single { GetNewsUseCase(get()) }
+}
 
-    single { provideNewsRepository(get(), get()) }
+val repositoryModule = module {
+
+    single { ArticleDatabaseMapper() }
+    single { ArticleNetworkMapper() }
+    single<ILocalDataSource> { LocalDataSource(get(), get()) }
+    single<IRemoteDataSource> { RemoteDataSource(get(), get()) }
+
+    single<INewsRepository> { NewsRepository(get(), get()) }
 }

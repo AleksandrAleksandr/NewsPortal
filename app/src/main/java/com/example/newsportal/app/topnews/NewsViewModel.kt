@@ -2,18 +2,23 @@ package com.example.newsportal.app.topnews
 
 import androidx.lifecycle.*
 import androidx.lifecycle.ViewModel
-import com.example.newsportal.data.NewsRepository
+import com.example.newsportal.domain.model.Article
+import com.example.newsportal.domain.usecases.GetNewsUseCase
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NewsViewModel (
-    private val mRepository: NewsRepository
+    private val getNewsUseCase: GetNewsUseCase
 ): ViewModel() {
 
-    val data = mRepository.data
+    private val _data = MutableLiveData<List<Article>>()
+    val data: LiveData<List<Article>> = _data
 
     init {
         viewModelScope.launch {
-            mRepository.refresh()
+
+            getNewsUseCase().collect { _data.value = it }
         }
     }
+
 }
