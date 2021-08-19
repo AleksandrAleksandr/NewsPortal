@@ -1,9 +1,7 @@
 package com.example.newsportal.app.topnews
 
-import android.util.Log
 import androidx.lifecycle.*
 import androidx.lifecycle.ViewModel
-import com.example.newsportal.data.NewsRepository
 import com.example.newsportal.domain.model.Article
 import com.example.newsportal.domain.usecases.GetNewsUseCase
 import kotlinx.coroutines.flow.collect
@@ -13,13 +11,13 @@ class NewsViewModel (
     private val getNewsUseCase: GetNewsUseCase
 ): ViewModel() {
 
-    val data = MutableLiveData<List<Article>>()
+    private val _data = MutableLiveData<List<Article>>()
+    val data: LiveData<List<Article>> = _data
 
     init {
         viewModelScope.launch {
 
-            val news = getNewsUseCase.invoke()
-            news.collect { data.value = it }
+            getNewsUseCase().collect { _data.value = it }
         }
     }
 

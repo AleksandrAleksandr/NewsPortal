@@ -3,7 +3,7 @@ package com.example.newsportal.data.remote
 import com.example.newsportal.data.remote.model.ArticleNetwork
 import com.example.newsportal.domain.model.Article
 
-class NetworkMapper {
+class ArticleNetworkMapper {
 
     fun mapToDomain(articleNetwork: ArticleNetwork, category: String) = with(articleNetwork) {
         Article(

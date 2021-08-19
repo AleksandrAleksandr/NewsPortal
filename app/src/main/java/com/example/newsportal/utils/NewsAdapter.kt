@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsportal.R
-import com.example.newsportal.data.local.model.ArticleLocal
 import com.example.newsportal.domain.model.Article
 import com.squareup.picasso.Picasso
 

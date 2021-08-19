@@ -1,6 +1,5 @@
 package com.example.newsportal.data.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface NewsDao {
 
     @Query("SELECT * from articlelocal")
-    fun findAll(): Flow<List<ArticleLocal>>
+    fun getAll(): Flow<List<ArticleLocal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun add(news: List<ArticleLocal>)

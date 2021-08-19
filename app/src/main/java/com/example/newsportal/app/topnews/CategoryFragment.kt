@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.newsportal.utils.NewsAdapter
-import com.example.newsportal.data.local.model.ArticleLocal
 import com.example.newsportal.databinding.FragmentCategoryBinding
 import com.example.newsportal.domain.model.Article
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -23,7 +22,7 @@ class CategoryFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCategoryBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,7 +31,7 @@ class CategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = NewsAdapter()
-        binding.rv.adapter = adapter
+        binding.rvNews.adapter = adapter
 
         viewModel.data.observe(viewLifecycleOwner, {
             adapter.setData(filteredNews(it))

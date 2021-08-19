@@ -3,7 +3,7 @@ package com.example.newsportal.data.local
 import com.example.newsportal.data.local.model.ArticleLocal
 import com.example.newsportal.domain.model.Article
 
-class DatabaseMapper {
+class ArticleDatabaseMapper {
 
     fun mapToDomain(localArticle: ArticleLocal) = with(localArticle) {
         Article(

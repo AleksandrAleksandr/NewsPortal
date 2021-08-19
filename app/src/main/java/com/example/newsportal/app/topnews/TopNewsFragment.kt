@@ -23,7 +23,7 @@ class TopNewsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTopHeadlineBinding.inflate(inflater, container, false)
         return binding.root
     }

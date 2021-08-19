@@ -7,24 +7,25 @@ import com.example.newsportal.domain.INewsRepository
 import com.example.newsportal.domain.model.Article
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 
 class NewsRepository(
     private val remoteSource: IRemoteDataSource,
     private val localSource: ILocalDataSource,
 ) : INewsRepository {
 
-    private val data = localSource.getAllNews()
-
     private suspend fun refresh() {
-        for (elem in Categories.values()) {
-            val news = remoteSource.getNewsByCategory(elem.name)
-            localSource.insertNews(news)
+        withContext(Dispatchers.IO){
+            for (elem in Categories.values()) {
+                val news = remoteSource.getNewsByCategory(elem.name)
+                localSource.insertNews(news)
+            }
         }
     }
 
     override fun getNewsList(): Flow<List<Article>>  = flow {
+        emitAll(localSource.getAllNews())
         refresh()
-        emitAll(data)
-    }
+    }.flowOn(Dispatchers.IO)
 
 }
