@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.newsportal.utils.NewsAdapter
 import com.example.newsportal.databinding.FragmentCategoryBinding
 import com.example.newsportal.domain.model.Article
+import com.example.newsportal.utils.ResultWrapper
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class CategoryFragment : Fragment() {
@@ -33,14 +34,25 @@ class CategoryFragment : Fragment() {
         val adapter = NewsAdapter()
         binding.rvNews.adapter = adapter
 
-        viewModel.data.observe(viewLifecycleOwner, {
-            adapter.setData(filteredNews(it))
+        viewModel.data.observe(viewLifecycleOwner, { status ->
+            when(status){
+                is ResultWrapper.Success -> adapter.setData(filteredNews(status.data)).also { setLoading(false) }
+                is ResultWrapper.Error -> {
+                    binding.tv.text = status.msg
+                    setLoading(false)
+                }
+                ResultWrapper.Loading -> setLoading(true)
+            }
         })
 
     }
 
     private fun filteredNews(news: List<Article>) =
         news.filter { it.category == category }
+
+    private fun setLoading(loading: Boolean){
+        binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
+    }
 
     companion object {
         private const val CATEGORY_KEY = "key"
