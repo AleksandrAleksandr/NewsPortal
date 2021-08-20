@@ -20,7 +20,6 @@ class NewsRepository(
             for (elem in Categories.values()) {
                 val newsResult = remoteSource.getNewsByCategory(elem.name)
                 newsResult.ifSuccess { localSource.insertNews(it) }
-                //localSource.insertNews(news)
             }
         }
     }

@@ -10,7 +10,6 @@ abstract class BaseApiResponce {
             if (response.isSuccessful) {
                 val body = response.body()
                 body?.let {
-                    //val articles = ((it as? NewsResponce)?.articles.orEmpty()) as R
                     return ResultWrapper.Success(body)
                 }
             }
