@@ -4,7 +4,6 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import com.example.newsportal.app.base.BaseFragment
-import com.example.newsportal.utils.NewsAdapter
 import com.example.newsportal.databinding.FragmentCategoryBinding
 import com.example.newsportal.domain.model.Article
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -23,7 +22,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
         binding.rvNews.adapter = adapter
 
         viewModel.data.observe(viewLifecycleOwner, { data ->
-            adapter.setData(filteredNews(data))
+            adapter.submitList(filteredNews(data))
         })
 
         viewModel.isLoading.observe(viewLifecycleOwner, {
@@ -34,8 +33,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
             showError(message)
         })
     }
-
-
 
     private fun filteredNews(news: List<Article>) =
         news.filter { it.category == category }
