@@ -5,6 +5,7 @@ import com.example.newsportal.domain.categories.Categories
 import com.example.newsportal.data.remote.IRemoteDataSource
 import com.example.newsportal.domain.INewsRepository
 import com.example.newsportal.domain.model.Article
+import com.example.newsportal.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
@@ -17,15 +18,16 @@ class NewsRepository(
     private suspend fun refresh() {
         withContext(Dispatchers.IO){
             for (elem in Categories.values()) {
-                val news = remoteSource.getNewsByCategory(elem.name)
-                localSource.insertNews(news)
+                val newsResult = remoteSource.getNewsByCategory(elem.name)
+                newsResult.ifSuccess { localSource.insertNews(it) }
             }
         }
     }
 
-    override fun getNewsList(): Flow<List<Article>>  = flow {
-        emitAll(localSource.getAllNews())
+    override fun getNewsList(): Flow<ResultWrapper<List<Article>>>  = flow {
+        emit(ResultWrapper.Loading)
         refresh()
+        emitAll(localSource.getAllNews())
     }.flowOn(Dispatchers.IO)
 
 }
