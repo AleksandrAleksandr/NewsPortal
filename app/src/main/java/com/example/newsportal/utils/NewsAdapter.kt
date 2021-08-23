@@ -27,7 +27,13 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ItemViewHolder>() {
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]
         holder.textView.text = item.title
-        Picasso.get().load(item.urlToImage).into(holder.imageView)
+        if (item.urlToImage.isEmpty()){
+
+        }
+        else {
+            Picasso.get().load(item.urlToImage).into(holder.imageView)
+        }
+
     }
 
     override fun getItemCount() = data.size
