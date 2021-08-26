@@ -11,6 +11,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
 
     private val viewModel: NewsViewModel by lazy { requireParentFragment().getViewModel<NewsViewModel>() }
+    private val adapter by lazy { NewsAdapter() }
     private val category: String by lazy {
         requireArguments().getString(CATEGORY_KEY, "general")
     }
@@ -18,9 +19,10 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
     override fun provideViewBinding() = FragmentCategoryBinding.inflate(layoutInflater)
 
     override fun setupViews() {
-        val adapter = NewsAdapter()
         binding.rvNews.adapter = adapter
+    }
 
+    override fun observeState() {
         viewModel.data.observe(viewLifecycleOwner, { data ->
             adapter.submitList(filteredNews(data))
         })

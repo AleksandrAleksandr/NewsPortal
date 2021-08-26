@@ -14,4 +14,13 @@ class RemoteDataSource(
             .map { mapper.mapResponceToDomainList(it, category) }
 
     }
+
+    override suspend fun getNewsBySearch(
+        phrase: String,
+        from: String,
+        to: String
+    ): ResultWrapper<List<Article>> {
+        return safeApiCall { service.getNewsBySearch(phrase, from, to) }
+            .map { mapper.mapResponceToDomainList(it, "") }
+    }
 }

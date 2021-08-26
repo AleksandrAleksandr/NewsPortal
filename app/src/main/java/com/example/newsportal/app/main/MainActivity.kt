@@ -1,10 +1,10 @@
 package com.example.newsportal.app.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.example.newsportal.R
-import com.example.newsportal.app.topnews.TopNewsFragment
+import com.example.newsportal.app.search.SearchNewsFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
 
-                add(R.id.fragment_container_view, TopNewsFragment())
+                //add(R.id.fragment_container_view, TopNewsFragment())
+                add(R.id.fragment_container_view, SearchNewsFragment())
             }
         }
     }
