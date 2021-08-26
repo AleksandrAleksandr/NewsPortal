@@ -7,7 +7,10 @@ import kotlinx.coroutines.flow.Flow
 
 class GetNewsSearchUseCase(private val repository: INewsRepository) {
 
-    suspend operator fun invoke(phrase: String, interval: Pair<String, String>): Flow<ResultWrapper<List<Article>>> {
+    suspend operator fun invoke(
+        phrase: String,
+        interval: Pair<String, String>
+    ): Flow<ResultWrapper<List<Article>>> {
         return repository.getNewsBySearch(phrase, interval)
     }
 }

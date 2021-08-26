@@ -20,6 +20,6 @@ interface NewsService {
 
     companion object {
         const val BASE_URL = "https://newsapi.org/v2/"
-        const val key = BuildConfig.API_KEY
+        private const val key = BuildConfig.API_KEY
     }
 }

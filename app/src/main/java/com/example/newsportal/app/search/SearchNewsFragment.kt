@@ -27,15 +27,15 @@ class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>() {
     override fun setupViews() {
         val picker =  constructDatePicker()
         viewModel.dateIntervalChanged(Pair(getDate(), getDate()))
-        binding.tvDatePick.text = getString(R.string.buttonText, getDate().toFormat(), getDate().toFormat())
+        binding.chipDatePick.text = getString(R.string.date_range, getDate().toFormat(), getDate().toFormat())
 
         picker.addOnPositiveButtonClickListener {
             val interval = Pair(it.first.toDate(), it.second.toDate())
-            binding.tvDatePick.text = getString(R.string.buttonText, interval.first.toFormat(), interval.second.toFormat())
+            binding.chipDatePick.text = getString(R.string.date_range, interval.first.toFormat(), interval.second.toFormat())
             viewModel.dateIntervalChanged(interval)
         }
 
-        binding.tvDatePick.setOnClickListener {
+        binding.chipDatePick.setOnClickListener {
             picker.show(requireActivity().supportFragmentManager, picker.toString())
         }
 

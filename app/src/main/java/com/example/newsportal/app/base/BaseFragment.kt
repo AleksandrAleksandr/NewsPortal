@@ -29,8 +29,8 @@ abstract class BaseFragment<T: ViewBinding>: Fragment() {
         observeState()
     }
 
-    open fun setupViews() {}
-    open fun observeState() {}
+    protected open fun setupViews() {}
+    protected open fun observeState() {}
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -9,6 +9,8 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+private const val TIMEOUT = 500L
+
 @ExperimentalCoroutinesApi
 @FlowPreview
 class NewsSearchViewModel(
@@ -41,7 +43,7 @@ class NewsSearchViewModel(
 
     private fun inputQueryFlow(): Flow<String> {
         return _query.asFlow()
-            .debounce(500)
+            .debounce(TIMEOUT)
             .filter { query ->
                 if (query.isEmpty()) {
                     _data.postValue(emptyList())

@@ -19,7 +19,7 @@ class NewsRepository(
 ) : INewsRepository {
 
     private suspend fun refresh() {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             for (elem in Categories.values()) {
                 val newsResult = remoteSource.getNewsByCategory(elem.name)
                 newsResult.ifSuccess { localSource.insertNews(it) }
@@ -27,13 +27,16 @@ class NewsRepository(
         }
     }
 
-    override fun getNewsList(): Flow<ResultWrapper<List<Article>>>  = flow {
+    override fun getNewsList(): Flow<ResultWrapper<List<Article>>> = flow {
         emit(ResultWrapper.Loading)
         refresh()
         emitAll(localSource.getAllNews())
     }.flowOn(Dispatchers.IO)
 
-    override fun getNewsBySearch(phrase: String, interval: Pair<String, String>): Flow<ResultWrapper<List<Article>>> = flow {
+    override fun getNewsBySearch(
+        phrase: String,
+        interval: Pair<String, String>
+    ): Flow<ResultWrapper<List<Article>>> = flow {
         emit(ResultWrapper.Loading)
         val foundNews = remoteSource.getNewsBySearch(phrase, interval.first, interval.second)
         emit(foundNews)

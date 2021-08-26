@@ -7,5 +7,9 @@ interface IRemoteDataSource {
 
     suspend fun getNewsByCategory(category: String): ResultWrapper<List<Article>>
 
-    suspend fun getNewsBySearch(phrase: String, from: String, to: String): ResultWrapper<List<Article>>
+    suspend fun getNewsBySearch(
+        phrase: String,
+        from: String,
+        to: String
+    ): ResultWrapper<List<Article>>
 }
