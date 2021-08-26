@@ -9,8 +9,6 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-private const val TIMEOUT = 500L
-
 @ExperimentalCoroutinesApi
 @FlowPreview
 class NewsSearchViewModel(
@@ -83,5 +81,9 @@ class NewsSearchViewModel(
 
     private fun setLoading(value: Boolean) {
         _isLoading.value = value
+    }
+
+    private companion object {
+        const val TIMEOUT = 500L
     }
 }
