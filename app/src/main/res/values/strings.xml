@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">NewsPortal</string>
+    <string name="buttonText">%1$s - %2$s</string>
+    <string name="searchHint">enter a phrase</string>
 
     <string-array name="categories">
         <item>business</item>

@@ -11,6 +11,13 @@ interface NewsService {
     @GET("top-headlines?country=ru&apiKey=${key}")
     suspend fun getTopNewsByCategory(@Query("category") category: String): Response<NewsResponce>
 
+    @GET("everything?language=en&pageSize=100&apiKey=${key}")
+    suspend fun getNewsBySearch(
+        @Query("q") phrase: String,
+        @Query("from") from: String,
+        @Query("to") to: String
+    ): Response<NewsResponce>
+
     companion object {
         const val BASE_URL = "https://newsapi.org/v2/"
         const val key = BuildConfig.API_KEY
