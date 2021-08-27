@@ -18,6 +18,8 @@ class NewsRepository(
     private val localSource: ILocalDataSource,
 ) : INewsRepository {
 
+    private var firstUpdateHappened = false
+
     private suspend fun refresh() {
         withContext(Dispatchers.IO) {
             for (elem in Categories.values()) {
@@ -29,7 +31,10 @@ class NewsRepository(
 
     override fun getNewsList(): Flow<ResultWrapper<List<Article>>> = flow {
         emit(ResultWrapper.Loading)
-        refresh()
+        if (!firstUpdateHappened){
+            refresh()
+            firstUpdateHappened = true
+        }
         emitAll(localSource.getAllNews())
     }.flowOn(Dispatchers.IO)
 

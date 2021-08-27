@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface NewsService {
 
-    @GET("top-headlines?country=ru&apiKey=${key}")
+    @GET("top-headlines?country=us&apiKey=${key}")
     suspend fun getTopNewsByCategory(@Query("category") category: String): Response<NewsResponce>
 
     @GET("everything?language=en&pageSize=100&apiKey=${key}")
