@@ -23,8 +23,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
     }
 
     override fun observeState() {
-        viewModel.data.observe(viewLifecycleOwner, { data ->
-            adapter.submitList(filteredNews(data))
+        viewModel.newsByCategory(category).observe(viewLifecycleOwner, { data ->
+            adapter.submitList(data)
         })
 
         viewModel.isLoading.observe(viewLifecycleOwner, {
@@ -35,9 +35,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
             showError(message)
         })
     }
-
-    private fun filteredNews(news: List<Article>) =
-        news.filter { it.category == category }
 
     private fun setLoading(loading: Boolean) {
         binding.progressBar.isVisible = loading
