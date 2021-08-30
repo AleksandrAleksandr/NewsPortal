@@ -3,7 +3,6 @@ package com.example.newsportal.utils
 import androidx.core.util.Pair
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
-import java.text.SimpleDateFormat
 import java.util.*
 
 private const val DAYS_IN_MONTH = 30
@@ -45,14 +44,5 @@ private fun limitRange(): CalendarConstraints.Builder {
 }
 
 fun getDate(): String {
-    return getCurrentDateTime().toString("yyyy-MM-dd")
-}
-
-private fun getCurrentDateTime(): Date {
-    return Calendar.getInstance().time
-}
-
-private fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
-    val formatter = SimpleDateFormat(format, locale)
-    return formatter.format(this)
+    return MaterialDatePicker.todayInUtcMilliseconds().toDate()
 }

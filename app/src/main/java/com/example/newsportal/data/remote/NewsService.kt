@@ -8,10 +8,10 @@ import retrofit2.http.Query
 
 interface NewsService {
 
-    @GET("top-headlines?country=ru&apiKey=${key}")
+    @GET("top-headlines?country=${COUNTRY}&apiKey=${key}")
     suspend fun getTopNewsByCategory(@Query("category") category: String): Response<NewsResponce>
 
-    @GET("everything?language=en&pageSize=100&apiKey=${key}")
+    @GET("everything?language=${LANGUAGE}&pageSize=${PAGE_SIZE}&apiKey=${key}")
     suspend fun getNewsBySearch(
         @Query("q") phrase: String,
         @Query("from") from: String,
@@ -21,5 +21,8 @@ interface NewsService {
     companion object {
         const val BASE_URL = "https://newsapi.org/v2/"
         private const val key = BuildConfig.API_KEY
+        private const val COUNTRY = "us"
+        private const val LANGUAGE = "en"
+        private const val PAGE_SIZE = "100"
     }
 }
