@@ -35,7 +35,7 @@ class NewsViewModel (
     }
 
     fun newsByCategory(category: String): LiveData<List<Article>> =
-        when(category) {
+        when (category) {
             Categories.health.toString() -> _newsHealth
             Categories.science.toString() -> _newsScience
             Categories.sports.toString() -> _newsSport
@@ -61,13 +61,15 @@ class NewsViewModel (
     }
 
     private fun handleSuccess(result: ResultWrapper.Success<List<Article>>) {
-        _newsSport.value = result.data.filter { it.category == Categories.sports.toString()}
-        _newsScience.value = result.data.filter { it.category == Categories.science.toString()}
-        _newsEntertainment.value = result.data.filter { it.category == Categories.entertainment.toString()}
-        _newsGeneral.value = result.data.filter { it.category == Categories.general.toString()}
-        _newsHealth.value = result.data.filter { it.category == Categories.health.toString()}
-        _newsTechnology.value = result.data.filter { it.category == Categories.technology.toString()}
-        _newsBusiness.value = result.data.filter { it.category == Categories.business.toString()}
+        with(result.data) {
+            _newsSport.value = filter { it.category == Categories.sports.toString() }
+            _newsScience.value = filter { it.category == Categories.science.toString() }
+            _newsEntertainment.value = filter { it.category == Categories.entertainment.toString() }
+            _newsGeneral.value = filter { it.category == Categories.general.toString() }
+            _newsHealth.value = filter { it.category == Categories.health.toString() }
+            _newsTechnology.value = filter { it.category == Categories.technology.toString() }
+            _newsBusiness.value = filter { it.category == Categories.business.toString() }
+        }
     }
 
     private fun setLoading(value: Boolean) {

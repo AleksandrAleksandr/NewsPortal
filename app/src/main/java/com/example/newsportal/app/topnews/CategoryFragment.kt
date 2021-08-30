@@ -5,7 +5,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import com.example.newsportal.app.base.BaseFragment
 import com.example.newsportal.databinding.FragmentCategoryBinding
-import com.example.newsportal.domain.model.Article
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
