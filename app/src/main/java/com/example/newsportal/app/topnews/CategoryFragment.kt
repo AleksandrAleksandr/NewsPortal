@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.newsportal.app.base.BaseFragment
 import com.example.newsportal.databinding.FragmentCategoryBinding
-import com.example.newsportal.domain.model.Article
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
@@ -24,8 +23,8 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
     }
 
     override fun observeState() {
-        viewModel.data.observe(viewLifecycleOwner, { data ->
-            adapter.submitList(filteredNews(data))
+        viewModel.newsByCategory(category).observe(viewLifecycleOwner, { data ->
+            adapter.submitList(data)
         })
 
         viewModel.isLoading.observe(viewLifecycleOwner, {
@@ -36,9 +35,6 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
             showError(message)
         })
     }
-
-    private fun filteredNews(news: List<Article>) =
-        news.filter { it.category == category }
 
     private fun setLoading(loading: Boolean) {
         binding.progressBar.isVisible = loading
