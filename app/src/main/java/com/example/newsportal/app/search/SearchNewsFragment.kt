@@ -7,6 +7,7 @@ import com.example.newsportal.R
 import com.example.newsportal.app.base.BaseFragment
 import com.example.newsportal.app.topnews.NewsAdapter
 import com.example.newsportal.databinding.FragmentSearchNewsBinding
+import com.example.newsportal.domain.model.Article
 import com.example.newsportal.utils.constructDatePicker
 import com.example.newsportal.utils.getDate
 import com.example.newsportal.utils.toDate
@@ -20,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>() {
 
     private val viewModel: NewsSearchViewModel by viewModel()
-    private val adapter by lazy { NewsAdapter() }
+    private val adapter by lazy { NewsAdapter(this::onArticleSelected) }
 
     override fun provideViewBinding() = FragmentSearchNewsBinding.inflate(layoutInflater)
 
@@ -70,5 +71,9 @@ class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>() {
 
     private fun showError(msg: String) {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
+    }
+
+    private fun onArticleSelected(article: Article) {
+
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/topNewsFragment">
 
@@ -12,4 +13,21 @@
         android:id="@+id/searchNewsFragment"
         android:name="com.example.newsportal.app.search.SearchNewsFragment"
         android:label="SearchNewsFragment" />
+    <fragment
+        android:id="@+id/newsDetailFragment"
+        android:name="com.example.newsportal.app.newsdetail.NewsDetailFragment"
+        android:label="NewsDetailFragment" >
+        <argument
+            android:name="article"
+            app:argType="com.example.newsportal.domain.model.Article" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.newsportal.app.topnews.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_newsDetailFragment"
+            app:destination="@id/newsDetailFragment" />
+    </fragment>
 </navigation>
