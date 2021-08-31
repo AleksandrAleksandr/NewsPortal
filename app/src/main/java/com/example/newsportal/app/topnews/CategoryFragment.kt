@@ -3,18 +3,21 @@ package com.example.newsportal.app.topnews
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
 import com.example.newsportal.app.base.BaseFragment
+import com.example.newsportal.app.newsdetail.NewsDetailPopup
+import com.example.newsportal.app.newsdetail.FragmentWithNewsDetailPopup
 import com.example.newsportal.databinding.FragmentCategoryBinding
+import com.example.newsportal.domain.model.Article
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
+class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), FragmentWithNewsDetailPopup {
 
     private val viewModel: NewsViewModel by lazy { requireParentFragment().getViewModel<NewsViewModel>() }
     private val adapter by lazy { NewsAdapter(this::onArticleSelected) }
     private val category: String by lazy {
         requireArguments().getString(CATEGORY_KEY, "general")
     }
+    override var newsDetailPopup: NewsDetailPopup? = null
 
     override fun provideViewBinding() = FragmentCategoryBinding.inflate(layoutInflater)
 
@@ -45,10 +48,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>() {
     }
 
     private fun onArticleSelected(article: Article) {
-        val action = CategoryFragmentDirections.actionCategoryFragmentToNewsDetailFragment(article)
-        findNavController().navigate(action)
-        //findNavController().navigateUp()
-        //findNavController().currentDestination.getAction()
+        showNewsDetailPopup(article, requireActivity(), binding.root)
     }
 
     companion object {

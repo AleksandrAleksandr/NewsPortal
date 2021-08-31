@@ -1,14 +1,14 @@
 package com.example.newsportal.app.topnews
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.newsportal.R
 import com.example.newsportal.databinding.ListItemBinding
 import com.example.newsportal.domain.model.Article
-import com.squareup.picasso.Picasso
 
 class NewsAdapter(val onItemClick: (Article) -> Unit) : ListAdapter<Article, NewsAdapter.ItemViewHolder>(NewsDiffCallback) {
 
@@ -17,9 +17,7 @@ class NewsAdapter(val onItemClick: (Article) -> Unit) : ListAdapter<Article, New
         fun bind(article: Article) {
             with (article) {
                 binding.itemTitle.text = title
-                if (urlToImage.isNotEmpty()) {
-                    Picasso.get().load(urlToImage).into(binding.itemImage)
-                }
+                Glide.with(binding.itemImage).load(urlToImage).error(R.drawable.ic_newspaper2).centerCrop().into(binding.itemImage)
                 binding.itemTitle.setOnClickListener { onItemClick(this) }
             }
         }

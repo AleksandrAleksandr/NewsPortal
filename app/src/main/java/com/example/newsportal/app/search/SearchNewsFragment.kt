@@ -5,6 +5,8 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.newsportal.R
 import com.example.newsportal.app.base.BaseFragment
+import com.example.newsportal.app.newsdetail.FragmentWithNewsDetailPopup
+import com.example.newsportal.app.newsdetail.NewsDetailPopup
 import com.example.newsportal.app.topnews.NewsAdapter
 import com.example.newsportal.databinding.FragmentSearchNewsBinding
 import com.example.newsportal.domain.model.Article
@@ -18,10 +20,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>() {
+class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>(), FragmentWithNewsDetailPopup {
 
     private val viewModel: NewsSearchViewModel by viewModel()
     private val adapter by lazy { NewsAdapter(this::onArticleSelected) }
+    override var newsDetailPopup: NewsDetailPopup? = null
 
     override fun provideViewBinding() = FragmentSearchNewsBinding.inflate(layoutInflater)
 
@@ -74,6 +77,6 @@ class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>() {
     }
 
     private fun onArticleSelected(article: Article) {
-
+        showNewsDetailPopup(article, requireActivity(), binding.root)
     }
 }
