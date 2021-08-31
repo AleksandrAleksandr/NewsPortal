@@ -1,5 +1,7 @@
 package com.example.newsportal.app.newsdetail
 
+import android.content.Intent
+import android.net.Uri
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
@@ -20,7 +22,9 @@ interface FragmentWithNewsDetailPopup {
                     }
 
                     override fun onBrowserButtonClicked() {
-
+                        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
+                        val browserChooserIntent = Intent.createChooser(browserIntent, "Choose browser")
+                        activity.startActivity(browserChooserIntent)
                     }
                 },
                 article

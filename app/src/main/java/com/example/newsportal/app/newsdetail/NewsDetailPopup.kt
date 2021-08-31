@@ -34,7 +34,8 @@ class NewsDetailPopup(
             }
             tvTitle.text = article.title
             tvDescription.text = article.description
-            tvAuthor.text = Resources.getSystem().getString(R.string.author_template, article.author)
+//            tvAuthor.text = Resources.getSystem().getString(R.string.author_template, article.author)
+            tvAuthor.text = "Author: " + article.author
             tvPublishedAt.text = article.publishedAt.take(10).toFormat()
             Glide.with(articleImage).load(article.urlToImage).error(R.drawable.ic_newspaper2)
                 .centerCrop().into(articleImage)
