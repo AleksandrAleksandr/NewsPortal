@@ -23,7 +23,7 @@ interface FragmentWithNewsDetailPopup {
 
                     override fun onBrowserButtonClicked() {
                         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
-                        val browserChooserIntent = Intent.createChooser(browserIntent, "Choose browser")
+                        val browserChooserIntent = Intent.createChooser(browserIntent, CHOOSER_TITLE)
                         activity.startActivity(browserChooserIntent)
                     }
                 },
@@ -41,5 +41,9 @@ interface FragmentWithNewsDetailPopup {
         val popup = newsDetailPopup
         newsDetailPopup = null
         popup?.dismiss()
+    }
+
+    private companion object{
+        const val CHOOSER_TITLE = "Choose browser"
     }
 }
