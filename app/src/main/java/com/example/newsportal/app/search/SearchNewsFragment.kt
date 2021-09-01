@@ -66,15 +66,6 @@ class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>(), FragmentWi
         viewModel.error.observe(viewLifecycleOwner, { message ->
             showError(message)
         })
-        val article = Article("",
-            "me",
-            "Header",
-            "lfqqac",
-            "https://ochen-strannye-dela.online/episodes/3_sezon_1_seriya",
-            "",
-            "2020-21-22",
-            "deq")
-        showNewsDetailPopup(article, requireActivity(), binding.root)
     }
 
     private fun setLoading(loading: Boolean) {

@@ -30,7 +30,7 @@ class NewsViewModel (
     init {
         viewModelScope.launch {
 
-            //getNewsUseCase().collect { handleResult(it) }
+            getNewsUseCase().collect { handleResult(it) }
         }
     }
 
