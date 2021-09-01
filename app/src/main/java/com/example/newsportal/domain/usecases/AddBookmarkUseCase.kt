@@ -6,6 +6,13 @@ import com.example.newsportal.domain.model.Article
 class AddBookmarkUseCase(private val repository: INewsRepository) {
 
     suspend operator fun invoke(article: Article) {
-        repository.addBookmark(article)
+        if (article.isBookmarked) {
+            article.isBookmarked = false
+            repository.deleteBookmark(article)
+        }
+        else {
+            article.isBookmarked = true
+            repository.addBookmark(article)
+        }
     }
 }

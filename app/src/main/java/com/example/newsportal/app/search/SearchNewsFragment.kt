@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>(), FragmentWithNewsDetailPopup {
 
     private val viewModel: NewsSearchViewModel by viewModel()
-    private val adapter by lazy { NewsAdapter(this::onArticleSelected) }
+    private val adapter by lazy { NewsAdapter(this::onArticleSelected, this::onBookmark) }
     override var newsDetailPopup: NewsDetailPopup? = null
 
     override fun provideViewBinding() = FragmentSearchNewsBinding.inflate(layoutInflater)
@@ -78,5 +78,9 @@ class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>(), FragmentWi
 
     private fun onArticleSelected(article: Article) {
         showNewsDetailPopup(article, requireActivity(), binding.root)
+    }
+
+    private fun onBookmark(article: Article) {
+        viewModel.bookmarkSelected(article)
     }
 }

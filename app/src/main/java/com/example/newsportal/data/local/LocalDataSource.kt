@@ -23,11 +23,22 @@ class LocalDataSource(
     }
 
     override fun addBookmark(article: Article) {
+        val local = mapper.mapToLocal(article)
+        newsDao.updateArticle(local)
         val bookmark = mapper.mapDomainToBookmark(article)
         bookmarksDao.addBookmark(bookmark)
     }
 
-    override fun getBookmarks(): List<Article> {
-        return bookmarksDao.getBookmarks().map { mapper.mapBookmarkToDomain(it) }
+    override fun deleteBookmark(article: Article) {
+        val local = mapper.mapToLocal(article)
+        newsDao.updateArticle(local)
+        val bookmark = mapper.mapDomainToBookmark(article)
+        bookmarksDao.deleteBookmark(bookmark)
+    }
+
+    override fun getBookmarks(): Flow<List<Article>> {
+        return bookmarksDao.getBookmarks().map { bookmarkList ->
+            bookmarkList.map { mapper.mapBookmarkToDomain(it) }
+        }
     }
 }

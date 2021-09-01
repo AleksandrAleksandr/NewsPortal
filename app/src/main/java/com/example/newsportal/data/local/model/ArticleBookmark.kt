@@ -5,10 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "bookmarks")
 data class ArticleBookmark (
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val category: String,
     val author: String,
-    val title: String,
+    @PrimaryKey val title: String,
     val description: String,
     val url: String,
     val urlToImage: String,

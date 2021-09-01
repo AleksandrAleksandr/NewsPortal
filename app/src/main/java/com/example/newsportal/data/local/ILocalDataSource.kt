@@ -11,5 +11,7 @@ interface ILocalDataSource {
 
     fun addBookmark(article: Article)
 
-    fun getBookmarks(): List<Article>
+    fun deleteBookmark(article: Article)
+
+    fun getBookmarks(): Flow<List<Article>>
 }
