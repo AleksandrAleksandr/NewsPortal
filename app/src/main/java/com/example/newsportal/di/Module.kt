@@ -8,6 +8,7 @@ import com.example.newsportal.app.topnews.NewsViewModel
 import com.example.newsportal.data.local.*
 import com.example.newsportal.data.remote.*
 import com.example.newsportal.domain.INewsRepository
+import com.example.newsportal.domain.usecases.AddBookmarkUseCase
 import com.example.newsportal.domain.usecases.GetNewsSearchUseCase
 import com.example.newsportal.domain.usecases.GetNewsUseCase
 import org.koin.android.ext.koin.androidApplication
@@ -33,7 +34,7 @@ fun provideNewsService(retrofit: Retrofit): NewsService {
 }
 
 val viewModelModule = module {
-    viewModel { NewsViewModel(get()) }
+    viewModel { NewsViewModel(get(), get()) }
     viewModel { NewsSearchViewModel(get()) }
 }
 
@@ -48,20 +49,26 @@ val databaseModule = module {
         return database.newsDao
     }
 
+    fun provideBookmarksDao(database: Database): BookmarksDao {
+        return database.bookmarksDao
+    }
+
     single { provideDatabase(androidApplication()) }
     single { provideDao(get()) }
+    single { provideBookmarksDao(get()) }
 }
 
 val domainModule = module {
     single { GetNewsUseCase(get()) }
     single { GetNewsSearchUseCase(get()) }
+    single { AddBookmarkUseCase(get()) }
 }
 
 val repositoryModule = module {
 
     single { ArticleDatabaseMapper() }
     single { ArticleNetworkMapper() }
-    single<ILocalDataSource> { LocalDataSource(get(), get()) }
+    single<ILocalDataSource> { LocalDataSource(get(),get(), get()) }
     single<IRemoteDataSource> { RemoteDataSource(get(), get()) }
 
     single<INewsRepository> { NewsRepository(get(), get()) }

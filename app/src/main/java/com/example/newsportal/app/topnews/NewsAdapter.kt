@@ -10,15 +10,19 @@ import com.example.newsportal.R
 import com.example.newsportal.databinding.ListItemBinding
 import com.example.newsportal.domain.model.Article
 
-class NewsAdapter(val onItemClick: (Article) -> Unit) : ListAdapter<Article, NewsAdapter.ItemViewHolder>(NewsDiffCallback) {
+class NewsAdapter(val onItemClick: (Article) -> Unit, val onBookmarkClick: (Article) -> Unit) :
+    ListAdapter<Article, NewsAdapter.ItemViewHolder>(NewsDiffCallback) {
 
-    inner class ItemViewHolder(private val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ItemViewHolder(private val binding: ListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: Article) {
-            with (article) {
+            with(article) {
                 binding.itemTitle.text = title
-                Glide.with(binding.itemImage).load(urlToImage).error(R.drawable.ic_newspaper2).centerCrop().into(binding.itemImage)
+                Glide.with(binding.itemImage).load(urlToImage).error(R.drawable.ic_newspaper2)
+                    .centerCrop().into(binding.itemImage)
                 binding.itemTitle.setOnClickListener { onItemClick(this) }
+                binding.btnBookmark.setOnClickListener { onBookmarkClick(this) }
             }
         }
     }

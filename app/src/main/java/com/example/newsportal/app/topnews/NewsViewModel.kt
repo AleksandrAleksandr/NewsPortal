@@ -4,13 +4,15 @@ import androidx.lifecycle.*
 import androidx.lifecycle.ViewModel
 import com.example.newsportal.domain.categories.Categories
 import com.example.newsportal.domain.model.Article
+import com.example.newsportal.domain.usecases.AddBookmarkUseCase
 import com.example.newsportal.domain.usecases.GetNewsUseCase
 import com.example.newsportal.utils.ResultWrapper
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NewsViewModel (
-    private val getNewsUseCase: GetNewsUseCase
+    private val getNewsUseCase: GetNewsUseCase,
+    private val addBookmarkUseCase: AddBookmarkUseCase
 ): ViewModel() {
 
     private val _isLoading = MutableLiveData(false)
@@ -45,6 +47,12 @@ class NewsViewModel (
             Categories.business.toString() -> _newsBusiness
             else -> MutableLiveData()
         }
+
+    fun bookmarkSelected(article: Article) {
+        viewModelScope.launch {
+            addBookmarkUseCase(article)
+        }
+    }
 
     private fun handleResult(result: ResultWrapper<List<Article>>) {
         when (result) {
