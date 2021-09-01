@@ -4,6 +4,8 @@
     <string name="search_view_hint">enter a phrase</string>
     <string name="search">Search</string>
     <string name="hot_news">Hot News</string>
+    <string name="go_to_browser">Go to browser</string>
+    <string name="author_template">Author: %s</string>
 
     <string-array name="categories">
         <item>business</item>
