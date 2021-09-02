@@ -6,18 +6,35 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class LocalDataSource(
-    private val dao: NewsDao,
+    private val newsDao: NewsDao,
+    private val bookmarksDao: BookmarksDao,
     private val mapper: ArticleDatabaseMapper
 ) : ILocalDataSource {
 
     override fun getAllNews(): Flow<ResultWrapper<List<Article>>> {
-        return dao.getAll().map { databaseList ->
+        return newsDao.getAll().map { databaseList ->
             ResultWrapper.Success(databaseList.map (mapper::mapToDomain) )
         }
     }
 
     override fun insertNews(news: List<Article>) {
         val mapped = news.map { mapper.mapToLocal(it) }
-        dao.add(mapped)
+        newsDao.add(mapped)
+    }
+
+    override fun addBookmark(article: Article) {
+        newsDao.updateArticle(mapper.mapToLocal(article))
+        bookmarksDao.addBookmark(mapper.mapDomainToBookmark(article))
+    }
+
+    override fun deleteBookmark(article: Article) {
+        newsDao.updateArticle(mapper.mapToLocal(article))
+        bookmarksDao.deleteBookmark(mapper.mapDomainToBookmark(article))
+    }
+
+    override fun getBookmarks(): Flow<List<Article>> {
+        return bookmarksDao.getBookmarks().map { bookmarkList ->
+            bookmarkList.map { mapper.mapBookmarkToDomain(it) }
+        }
     }
 }

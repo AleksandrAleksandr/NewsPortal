@@ -10,4 +10,9 @@
         android:enabled="true"
         android:icon="@drawable/ic_search"
         android:title="@string/search" />
+    <item
+        android:id="@+id/bookmarksFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_bookmark"
+        android:title="@string/bookmarks" />
 </menu>

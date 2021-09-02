@@ -2,6 +2,7 @@ package com.example.newsportal.app.search
 
 import androidx.lifecycle.*
 import com.example.newsportal.domain.model.Article
+import com.example.newsportal.domain.usecases.AddBookmarkUseCase
 import com.example.newsportal.domain.usecases.GetNewsSearchUseCase
 import com.example.newsportal.utils.ResultWrapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 @ExperimentalCoroutinesApi
 @FlowPreview
 class NewsSearchViewModel(
-    private val getNewsSearchUseCase: GetNewsSearchUseCase
+    private val getNewsSearchUseCase: GetNewsSearchUseCase,
+    private val addBookmarkUseCase: AddBookmarkUseCase
 ) : ViewModel() {
 
     private val _isLoading = MutableLiveData(false)
@@ -63,6 +65,12 @@ class NewsSearchViewModel(
 
     fun dateIntervalChanged(newInterval: Pair<String, String>) {
         _interval.value = newInterval
+    }
+
+    fun bookmarkSelected(article: Article) {
+        viewModelScope.launch {
+            addBookmarkUseCase(article)
+        }
     }
 
     private fun handleResult(result: ResultWrapper<List<Article>>) {

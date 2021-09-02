@@ -1,38 +1,33 @@
-package com.example.newsportal.app.topnews
+package com.example.newsportal.app.bookmarks
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsportal.R
+import com.example.newsportal.app.bookmarks.touchhelper.ItemTouchHelperAdapter
+import com.example.newsportal.app.topnews.NewsDiffCallback
 import com.example.newsportal.databinding.ListItemBinding
 import com.example.newsportal.domain.model.Article
 
-class NewsAdapter(val onItemClick: (Article) -> Unit, val onBookmarkClick: (Article) -> Unit) :
-    ListAdapter<Article, NewsAdapter.ItemViewHolder>(NewsDiffCallback) {
+class BookmarksAdapter(
+    val onItemClick: (Article) -> Unit,
+    val onItemSwiped: (Article) -> Unit
+) : ListAdapter<Article, BookmarksAdapter.ItemViewHolder>(NewsDiffCallback),
+    ItemTouchHelperAdapter {
 
     inner class ItemViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: Article) {
             binding.apply {
+                bookmarkBtn.visibility = View.GONE
                 itemTitle.text = article.title
                 Glide.with(root).load(article.urlToImage).error(R.drawable.ic_newspaper2)
                     .centerCrop().into(itemImage)
                 itemView.setOnClickListener { onItemClick(article) }
-                if (article.isBookmarked) {
-                    bookmarkBtn.setImageResource(R.drawable.ic_bookmark_filled)
-                }
-
-                bookmarkBtn.setOnClickListener {
-                    bookmarkBtn.setImageResource(
-                        if (article.isBookmarked) R.drawable.ic_bookmark
-                        else R.drawable.ic_bookmark_filled
-                    )
-                    onBookmarkClick(article)
-                }
             }
         }
     }
@@ -45,15 +40,8 @@ class NewsAdapter(val onItemClick: (Article) -> Unit, val onBookmarkClick: (Arti
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-}
 
-object NewsDiffCallback : DiffUtil.ItemCallback<Article>() {
-    override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
-        return oldItem.title == newItem.title
+    override fun onItemDismiss(position: Int) {
+        onItemSwiped(getItem(position))
     }
-
-    override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
-        return oldItem == newItem
-    }
-
 }

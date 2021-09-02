@@ -13,7 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), FragmentWithNewsDetailPopup {
 
     private val viewModel: NewsViewModel by lazy { requireParentFragment().getViewModel<NewsViewModel>() }
-    private val adapter by lazy { NewsAdapter(this::onArticleSelected) }
+    private val adapter by lazy { NewsAdapter(this::onArticleSelected, this::onBookmark) }
     private val category: String by lazy {
         requireArguments().getString(CATEGORY_KEY, "general")
     }
@@ -49,6 +49,10 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), FragmentWithNe
 
     private fun onArticleSelected(article: Article) {
         showNewsDetailPopup(article, requireActivity(), binding.root)
+    }
+
+    private fun onBookmark(article: Article) {
+        viewModel.bookmarkSelected(article)
     }
 
     companion object {

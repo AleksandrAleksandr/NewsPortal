@@ -8,4 +8,10 @@ interface ILocalDataSource {
     fun getAllNews(): Flow<ResultWrapper<List<Article>>>
 
     fun insertNews(news: List<Article>)
+
+    fun addBookmark(article: Article)
+
+    fun deleteBookmark(article: Article)
+
+    fun getBookmarks(): Flow<List<Article>>
 }

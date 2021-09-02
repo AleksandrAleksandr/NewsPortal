@@ -47,4 +47,19 @@ class NewsRepository(
         emit(foundNews)
     }.flowOn(Dispatchers.IO)
 
+    override suspend fun addBookmark(article: Article) {
+        withContext(Dispatchers.IO){
+            localSource.addBookmark(article)
+        }
+    }
+
+    override suspend fun deleteBookmark(article: Article) {
+        withContext(Dispatchers.IO) {
+            localSource.deleteBookmark(article)
+        }
+    }
+
+    override fun getBookmarks(): Flow<List<Article>> = flow {
+        emitAll(localSource.getBookmarks())
+    }.flowOn(Dispatchers.IO)
 }

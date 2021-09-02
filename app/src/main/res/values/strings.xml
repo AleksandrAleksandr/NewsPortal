@@ -6,6 +6,7 @@
     <string name="hot_news">Hot News</string>
     <string name="go_to_browser">Go to browser</string>
     <string name="author_template">Author: %s</string>
+    <string name="bookmarks">Bookmarks</string>
 
     <string-array name="categories">
         <item>business</item>
