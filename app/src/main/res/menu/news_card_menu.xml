@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/view_in_browser"
+        android:enabled="true"
+        android:icon="@drawable/ic_chrome"
+        android:title="@string/view_in_browser" />
+    <item
+        android:id="@+id/add_to_bookmark"
+        android:enabled="true"
+        android:icon="@drawable/ic_bookmark_filled"
+        android:title="@string/add_to_bookmarks" />
+</menu>

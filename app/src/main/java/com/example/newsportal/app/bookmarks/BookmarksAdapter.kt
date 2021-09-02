@@ -24,6 +24,7 @@ class BookmarksAdapter(
         fun bind(article: Article) {
             binding.apply {
                 bookmarkBtn.visibility = View.GONE
+                itemMenu.visibility = View.GONE
                 itemTitle.text = article.title
                 Glide.with(root).load(article.urlToImage).error(R.drawable.ic_newspaper2)
                     .centerCrop().into(itemImage)

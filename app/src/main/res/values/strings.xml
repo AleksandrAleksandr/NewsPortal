@@ -7,6 +7,9 @@
     <string name="go_to_browser">Go to browser</string>
     <string name="author_template">Author: %s</string>
     <string name="bookmarks">Bookmarks</string>
+    <string name="add_to_bookmarks">Add to bookmarks</string>
+    <string name="remove_to_bookmarks">Remove from bookmarks</string>
+    <string name="view_in_browser">View in browser</string>
 
     <string-array name="categories">
         <item>business</item>
