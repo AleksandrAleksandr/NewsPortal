@@ -17,21 +17,21 @@ class NewsAdapter(val onItemClick: (Article) -> Unit, val onBookmarkClick: (Arti
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: Article) {
-            with(article) {
-                binding.itemTitle.text = title
-                Glide.with(binding.root).load(urlToImage).error(R.drawable.ic_newspaper2)
-                    .centerCrop().into(binding.itemImage)
-                binding.itemTitle.setOnClickListener { onItemClick(this) }
-                if (isBookmarked) {
-                    binding.btnBookmark.setImageResource(R.drawable.ic_bookmark_filled)
+            binding.apply {
+                itemTitle.text = article.title
+                Glide.with(root).load(article.urlToImage).error(R.drawable.ic_newspaper2)
+                    .centerCrop().into(itemImage)
+                itemView.setOnClickListener { onItemClick(article) }
+                if (article.isBookmarked) {
+                    bookmarkBtn.setImageResource(R.drawable.ic_bookmark_filled)
                 }
 
-                binding.btnBookmark.setOnClickListener {
-                    binding.btnBookmark.setImageResource(
-                        if (isBookmarked) R.drawable.ic_bookmark
+                bookmarkBtn.setOnClickListener {
+                    bookmarkBtn.setImageResource(
+                        if (article.isBookmarked) R.drawable.ic_bookmark
                         else R.drawable.ic_bookmark_filled
                     )
-                    onBookmarkClick(this)
+                    onBookmarkClick(article)
                 }
             }
         }

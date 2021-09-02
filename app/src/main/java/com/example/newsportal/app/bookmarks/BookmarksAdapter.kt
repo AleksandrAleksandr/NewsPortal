@@ -22,12 +22,12 @@ class BookmarksAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(article: Article) {
-            with(article) {
-                binding.btnBookmark.visibility = View.GONE
-                binding.itemTitle.text = title
-                Glide.with(binding.root).load(urlToImage).error(R.drawable.ic_newspaper2)
-                    .centerCrop().into(binding.itemImage)
-                binding.itemTitle.setOnClickListener { onItemClick(this) }
+            binding.apply {
+                bookmarkBtn.visibility = View.GONE
+                itemTitle.text = article.title
+                Glide.with(root).load(article.urlToImage).error(R.drawable.ic_newspaper2)
+                    .centerCrop().into(itemImage)
+                itemView.setOnClickListener { onItemClick(article) }
             }
         }
     }
@@ -45,6 +45,3 @@ class BookmarksAdapter(
         onItemSwiped(getItem(position))
     }
 }
-
-
-

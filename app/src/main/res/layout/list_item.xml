@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:layout_margin="@dimen/margin_medium">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,16 +18,16 @@
             <ImageView
                 android:id="@+id/item_image"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="@dimen/news_card_image_height"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_newspaper2" />
 
             <ImageView
-                android:id="@+id/btnBookmark"
+                android:id="@+id/bookmark_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_margin="4dp"
+                android:layout_margin="@dimen/margin_small"
                 android:background="@color/white"
                 android:src="@drawable/ic_bookmark" />
         </FrameLayout>
@@ -38,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:padding="8dp"
+            android:padding="@dimen/padding_medium"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             tools:text="Header" />
 

@@ -37,7 +37,4 @@ class BookmarksFragment: BaseFragment<FragmentBookmarksBinding>(), FragmentWithN
     private fun onItemSwiped(article: Article) {
         bookmarksViewModel.onArticleSwiped(article)
     }
-
-
-
 }
