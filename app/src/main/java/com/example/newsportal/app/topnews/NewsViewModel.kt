@@ -6,13 +6,15 @@ import com.example.newsportal.domain.categories.Categories
 import com.example.newsportal.domain.model.Article
 import com.example.newsportal.domain.usecases.AddBookmarkUseCase
 import com.example.newsportal.domain.usecases.GetNewsUseCase
+import com.example.newsportal.domain.usecases.RefreshNewsUseCase
 import com.example.newsportal.utils.ResultWrapper
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NewsViewModel (
     private val getNewsUseCase: GetNewsUseCase,
-    private val addBookmarkUseCase: AddBookmarkUseCase
+    private val addBookmarkUseCase: AddBookmarkUseCase,
+    private val refreshNewsUseCase: RefreshNewsUseCase
 ): ViewModel() {
 
     private val _isLoading = MutableLiveData(false)
@@ -51,6 +53,13 @@ class NewsViewModel (
     fun bookmarkSelected(article: Article) {
         viewModelScope.launch {
             addBookmarkUseCase(article)
+        }
+    }
+
+    fun refresh() {
+        viewModelScope.launch {
+            refreshNewsUseCase()
+            setLoading(false)
         }
     }
 

@@ -10,6 +10,9 @@ interface NewsDao {
     @Query("SELECT * from articlelocal")
     fun getAll(): Flow<List<ArticleLocal>>
 
+    @Query("SELECT * from articlelocal")
+    fun getAllOneTime(): List<ArticleLocal>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun add(news: List<ArticleLocal>)
 

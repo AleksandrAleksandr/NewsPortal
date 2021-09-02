@@ -33,7 +33,7 @@ fun provideNewsService(retrofit: Retrofit): NewsService {
 }
 
 val viewModelModule = module {
-    viewModel { NewsViewModel(get(), get()) }
+    viewModel { NewsViewModel(get(), get(), get()) }
     viewModel { NewsSearchViewModel(get(), get()) }
     viewModel { BookmarksViewModel(get(), get()) }
 }
@@ -64,6 +64,7 @@ val domainModule = module {
     single { AddBookmarkUseCase(get()) }
     single { GetBookmarksUseCase(get()) }
     single { DeleteBookmarkUseCase(get()) }
+    single { RefreshNewsUseCase(get()) }
 }
 
 val repositoryModule = module {
