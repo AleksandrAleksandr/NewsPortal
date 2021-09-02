@@ -21,12 +21,12 @@ class NewsRepository(
     private var firstUpdateHappened = false
 
     private suspend fun refresh() {
-//        withContext(Dispatchers.IO) {
-//            for (elem in Categories.values()) {
-//                val newsResult = remoteSource.getNewsByCategory(elem.name)
-//                newsResult.ifSuccess { localSource.insertNews(it) }
-//            }
-//        }
+        withContext(Dispatchers.IO) {
+            for (elem in Categories.values()) {
+                val newsResult = remoteSource.getNewsByCategory(elem.name)
+                newsResult.ifSuccess { localSource.insertNews(it) }
+            }
+        }
     }
 
     override fun getNewsList(): Flow<ResultWrapper<List<Article>>> = flow {
