@@ -5,6 +5,7 @@ import android.net.Uri
 import android.view.Gravity
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import com.example.newsportal.R
 import com.example.newsportal.domain.model.Article
 
 interface FragmentWithNewsDetailPopup {
@@ -23,8 +24,10 @@ interface FragmentWithNewsDetailPopup {
 
                     override fun onBrowserButtonClicked() {
                         val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
-                        val browserChooserIntent = Intent.createChooser(browserIntent, CHOOSER_TITLE)
-                        activity.startActivity(browserChooserIntent)
+                        Intent.createChooser(
+                            browserIntent,
+                            activity.getString(R.string.choose_browser)
+                        ).also { activity.startActivity(it) }
                     }
                 },
                 article
@@ -41,9 +44,5 @@ interface FragmentWithNewsDetailPopup {
         val popup = newsDetailPopup
         newsDetailPopup = null
         popup?.dismiss()
-    }
-
-    private companion object{
-        const val CHOOSER_TITLE = "Choose browser"
     }
 }

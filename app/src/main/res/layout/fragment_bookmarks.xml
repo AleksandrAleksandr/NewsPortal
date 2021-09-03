@@ -12,4 +12,11 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_item" />
 
+    <TextView
+        android:id="@+id/tvNoBookmarks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/you_haven_t_added_any_bookmarks" />
+
 </FrameLayout>
