@@ -16,4 +16,8 @@ sealed class ResultWrapper<out T>{
     inline fun ifSuccess(fn: (T) -> Unit) {
         if (this is Success) fn(data)
     }
+
+    inline fun ifError(fn: () -> Unit) {
+        if (this is Error) fn()
+    }
 }

@@ -34,7 +34,11 @@ class NewsRepository(
         emit(localSource.getAllNewsOneTime())
         emit(ResultWrapper.Loading)
         if (!firstUpdateHappened){
-            refresh()
+            for (elem in Categories.values()) {
+                val newsResult = remoteSource.getNewsByCategory(elem.name)
+                newsResult.ifSuccess { localSource.insertNews(it) }
+                newsResult.ifError { emit(newsResult) }
+            }
             firstUpdateHappened = true
         }
         emitAll(localSource.getAllNews())
