@@ -29,7 +29,7 @@ class NewsAdapter(val onItemClick: (Article) -> Unit, val onBookmarkClick: (Arti
                     .centerCrop().into(itemImage)
                 itemView.setOnClickListener { onItemClick(article) }
                 if (article.isBookmarked) {
-                    bookmarkBtn.setImageResource(R.drawable.ic_bookmark_filled)
+                    bookmarkBtn.visibility = View.VISIBLE
                 }
 
                 bookmarkBtn.setOnClickListener {
@@ -58,7 +58,6 @@ class NewsAdapter(val onItemClick: (Article) -> Unit, val onBookmarkClick: (Arti
                             true
                         }
                         R.id.add_to_bookmark -> {
-                            it.title
                             updateBookmarkIcon(binding.bookmarkBtn, article)
                             onBookmarkClick(article)
                             true
@@ -86,10 +85,7 @@ class NewsAdapter(val onItemClick: (Article) -> Unit, val onBookmarkClick: (Arti
     }
 
     fun updateBookmarkIcon(bookmark: ImageView, article: Article) {
-        bookmark.setImageResource(
-            if (article.isBookmarked) R.drawable.ic_bookmark
-            else R.drawable.ic_bookmark_filled
-        )
+        bookmark.visibility = if (article.isBookmarked) View.GONE else View.VISIBLE
     }
 }
 
