@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.Flow
 interface ILocalDataSource {
     fun getAllNews(): Flow<ResultWrapper<List<Article>>>
 
+    fun getAllNewsOneTime(): ResultWrapper<List<Article>>
+
     fun insertNews(news: List<Article>)
 
     fun addBookmark(article: Article)

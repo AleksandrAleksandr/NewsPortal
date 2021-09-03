@@ -13,6 +13,8 @@ interface INewsRepository {
         interval: Pair<String, String>
     ): Flow<ResultWrapper<List<Article>>>
 
+    suspend fun refresh()
+
     suspend fun addBookmark(article: Article)
 
     suspend fun deleteBookmark(article: Article)
