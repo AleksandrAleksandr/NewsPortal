@@ -20,7 +20,7 @@ class NewsRepository(
 
     private var firstUpdateHappened = false
 
-    private suspend fun refresh() {
+    override suspend fun refresh() {
         withContext(Dispatchers.IO) {
             for (elem in Categories.values()) {
                 val newsResult = remoteSource.getNewsByCategory(elem.name)
@@ -30,6 +30,8 @@ class NewsRepository(
     }
 
     override fun getNewsList(): Flow<ResultWrapper<List<Article>>> = flow {
+        emit(ResultWrapper.Loading)
+        emit(localSource.getAllNewsOneTime())
         emit(ResultWrapper.Loading)
         if (!firstUpdateHappened){
             refresh()

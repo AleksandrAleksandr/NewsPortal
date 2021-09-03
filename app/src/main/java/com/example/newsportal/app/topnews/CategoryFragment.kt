@@ -2,7 +2,6 @@ package com.example.newsportal.app.topnews
 
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import com.example.newsportal.app.base.BaseFragment
 import com.example.newsportal.app.newsdetail.NewsDetailPopup
 import com.example.newsportal.app.newsdetail.FragmentWithNewsDetailPopup
@@ -23,6 +22,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), FragmentWithNe
 
     override fun setupViews() {
         binding.rvNews.adapter = adapter
+        binding.swipeLayout.setOnRefreshListener { viewModel.refresh() }
     }
 
     override fun observeState() {
@@ -40,7 +40,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), FragmentWithNe
     }
 
     private fun setLoading(loading: Boolean) {
-        binding.progressBar.isVisible = loading
+        binding.swipeLayout.isRefreshing = loading
     }
 
     private fun showError(msg: String) {

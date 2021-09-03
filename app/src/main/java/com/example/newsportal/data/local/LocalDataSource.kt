@@ -17,6 +17,10 @@ class LocalDataSource(
         }
     }
 
+    override fun getAllNewsOneTime(): ResultWrapper<List<Article>> {
+        return ResultWrapper.Success(newsDao.getAllOneTime().map { mapper.mapToDomain(it) })
+    }
+
     override fun insertNews(news: List<Article>) {
         val mapped = news.map { mapper.mapToLocal(it) }
         newsDao.add(mapped)
