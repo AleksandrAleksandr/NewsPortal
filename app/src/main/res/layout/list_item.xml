@@ -19,6 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
             tools:src="@drawable/ic_newspaper2" />
 
         <ImageView
@@ -26,36 +27,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:visibility="gone"
-            android:layout_margin="@dimen/margin_small"
+            android:layout_margin="@dimen/margin_medium"
             android:src="@drawable/ic_bookmark"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/item_image"
-            app:layout_constraintTop_toTopOf="@id/item_image" />
+            app:layout_constraintTop_toTopOf="@id/item_image"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/item_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:padding="@dimen/padding_medium"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_large"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_large"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             app:layout_constraintEnd_toStartOf="@id/item_menu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_image"
             tools:text="Header" />
 
-        <TextView
+        <ImageButton
             android:id="@+id/item_menu"
+            style="?android:attr/actionOverflowButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/padding_medium"
-            android:paddingRight="@dimen/padding_medium"
-            android:text="&#8942;"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:textStyle="bold"
+            android:text="@string/three_dots"
             app:layout_constraintBottom_toBottomOf="@id/item_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/item_title" />
+            app:layout_constraintTop_toTopOf="@id/item_title"
+            tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
