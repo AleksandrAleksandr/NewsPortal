@@ -15,7 +15,6 @@
             android:id="@+id/item_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/news_card_image_height"
-            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +28,7 @@
             android:layout_gravity="end"
             android:layout_margin="@dimen/margin_medium"
             android:src="@drawable/ic_bookmark"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/item_image"
             app:layout_constraintTop_toTopOf="@id/item_image"
             tools:ignore="ContentDescription" />
