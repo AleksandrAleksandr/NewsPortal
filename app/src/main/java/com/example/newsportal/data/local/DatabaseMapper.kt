@@ -16,6 +16,7 @@ class ArticleDatabaseMapper {
             urlToImage = urlToImage,
             publishedAt = publishedAt,
             content = content,
+            source = source,
             isBookmarked = isBookmarked
         )
     }
@@ -31,6 +32,7 @@ class ArticleDatabaseMapper {
             urlToImage = urlToImage,
             publishedAt = publishedAt,
             content = content,
+            source = source,
             isBookmarked = isBookmarked
         )
     }
@@ -44,7 +46,8 @@ class ArticleDatabaseMapper {
             url = url,
             urlToImage = urlToImage,
             publishedAt = publishedAt,
-            content = content
+            content = content,
+            source = source
         )
     }
 
@@ -57,7 +60,8 @@ class ArticleDatabaseMapper {
             url = url,
             urlToImage = urlToImage,
             publishedAt = publishedAt,
-            content = content
+            content = content,
+            source = source
         )
     }
 }

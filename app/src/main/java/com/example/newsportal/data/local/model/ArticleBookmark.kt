@@ -13,4 +13,5 @@ data class ArticleBookmark (
     val urlToImage: String,
     val publishedAt: String,
     val content: String,
+    val source: String
 )

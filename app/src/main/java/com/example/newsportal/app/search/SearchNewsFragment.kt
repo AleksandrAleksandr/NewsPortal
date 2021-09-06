@@ -44,7 +44,10 @@ class SearchNewsFragment : BaseFragment<FragmentSearchNewsBinding>(), FragmentWi
         }
 
         binding.svQuery.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?) = true
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.svQuery.clearFocus()
+                return true
+            }
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.queryTextChanged(newText)

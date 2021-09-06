@@ -1,5 +1,6 @@
 package com.example.newsportal.app.bookmarks
 
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.newsportal.app.base.BaseFragment
 import com.example.newsportal.app.bookmarks.touchhelper.ItemTouchHelperCallback
@@ -28,6 +29,13 @@ class BookmarksFragment: BaseFragment<FragmentBookmarksBinding>(), FragmentWithN
         bookmarksViewModel.bookmarks.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
+        bookmarksViewModel.noBookmarks.observe(viewLifecycleOwner, {
+            showNoBookmarksText(it)
+        })
+    }
+
+    fun showNoBookmarksText(show: Boolean) {
+        binding.tvNoBookmarks.isVisible = show
     }
 
     private fun onArticleSelected(article: Article) {
