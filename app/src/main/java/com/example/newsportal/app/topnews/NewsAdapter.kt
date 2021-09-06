@@ -31,6 +31,9 @@ class NewsAdapter(val onItemClick: (Article) -> Unit, val onBookmarkClick: (Arti
                 if (article.isBookmarked) {
                     bookmarkBtn.visibility = View.VISIBLE
                 }
+                else {
+                    bookmarkBtn.visibility = View.GONE
+                }
 
                 bookmarkBtn.setOnClickListener {
                     updateBookmarkIcon(bookmarkBtn, article)
