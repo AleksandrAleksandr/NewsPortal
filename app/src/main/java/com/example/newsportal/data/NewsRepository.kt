@@ -7,10 +7,7 @@ import com.example.newsportal.domain.categories.Categories
 import com.example.newsportal.domain.model.Article
 import com.example.newsportal.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 
 class NewsRepository(
@@ -20,11 +17,18 @@ class NewsRepository(
 
     private var firstUpdateHappened = false
 
-    override suspend fun refresh() {
+    override suspend fun refresh(category: String): Flow<ResultWrapper<List<Article>>> = flow {
+        val newsResult = remoteSource.getNewsByCategory(category)
+        newsResult.ifSuccess { localSource.insertNews(it) }
+        newsResult.ifError { emit(newsResult) }
+    }
+
+    private suspend inline fun fetchNews(flowCollector: FlowCollector<ResultWrapper<List<Article>>>) {
         withContext(Dispatchers.IO) {
             for (elem in Categories.values()) {
                 val newsResult = remoteSource.getNewsByCategory(elem.name)
                 newsResult.ifSuccess { localSource.insertNews(it) }
+                newsResult.ifError { flowCollector.emit(newsResult) }
             }
         }
     }
@@ -34,7 +38,7 @@ class NewsRepository(
         emit(localSource.getAllNewsOneTime())
         emit(ResultWrapper.Loading)
         if (!firstUpdateHappened){
-            refresh()
+            fetchNews(this)
             firstUpdateHappened = true
         }
         emitAll(localSource.getAllNews())

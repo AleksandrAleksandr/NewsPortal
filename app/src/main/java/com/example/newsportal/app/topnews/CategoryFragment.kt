@@ -22,7 +22,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding>(), FragmentWithNe
 
     override fun setupViews() {
         binding.rvNews.adapter = adapter
-        binding.swipeLayout.setOnRefreshListener { viewModel.refresh() }
+        binding.swipeLayout.setOnRefreshListener { viewModel.refresh(category) }
     }
 
     override fun observeState() {
