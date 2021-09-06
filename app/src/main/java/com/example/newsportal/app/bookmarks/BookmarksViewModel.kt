@@ -18,15 +18,28 @@ class BookmarksViewModel(
     private val _bookmarks = MutableLiveData<List<Article>>()
     val bookmarks: LiveData<List<Article>> = _bookmarks
 
+    private val _noBookmarks = MutableLiveData<Boolean>()
+    val noBookmarks: LiveData<Boolean> = _noBookmarks
+
     init {
         viewModelScope.launch {
-            getBookmarksUseCase().collect { _bookmarks.value = it }
+            getBookmarksUseCase().collect { handleResult(it) }
         }
     }
 
     fun onArticleSwiped(article: Article) {
         viewModelScope.launch {
             deleteBookmarkUseCase(article)
+        }
+    }
+
+    private fun handleResult(news: List<Article>) {
+        if (news.isEmpty()) {
+            _noBookmarks.value = true
+        }
+        else {
+            _bookmarks.value = news
+            _noBookmarks.value = false
         }
     }
 }

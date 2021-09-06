@@ -50,6 +50,7 @@ class NewsRepository(
     ): Flow<ResultWrapper<List<Article>>> = flow {
         emit(ResultWrapper.Loading)
         val foundNews = remoteSource.getNewsBySearch(phrase, interval.first, interval.second)
+        foundNews.ifSuccess { localSource.checkNewsIfBookmarked(it) }
         emit(foundNews)
     }.flowOn(Dispatchers.IO)
 

@@ -15,7 +15,8 @@ class ArticleNetworkMapper {
             url = url.orEmpty(),
             urlToImage = urlToImage.orEmpty(),
             publishedAt = publishedAt.orEmpty(),
-            content = content.orEmpty()
+            content = content.orEmpty(),
+            source = source?.name.orEmpty()
         )
     }
 

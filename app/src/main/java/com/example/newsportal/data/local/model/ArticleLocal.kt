@@ -13,5 +13,6 @@ data class ArticleLocal(
     val urlToImage: String,
     val publishedAt: String,
     val content: String,
+    val source: String,
     var isBookmarked: Boolean = false
 )

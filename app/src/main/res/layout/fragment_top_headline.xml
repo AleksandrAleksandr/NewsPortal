@@ -7,8 +7,12 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        app:tabMode="scrollable"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        app:tabIndicatorColor="?attr/colorOnPrimary"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="?attr/colorOnPrimary"
+        app:tabTextColor="?attr/colorOnSurface" />
 
 </androidx.viewpager.widget.ViewPager>
