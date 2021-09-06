@@ -56,9 +56,9 @@ class NewsViewModel (
         }
     }
 
-    fun refresh() {
+    fun refresh(category: String) {
         viewModelScope.launch {
-            refreshNewsUseCase()
+            refreshNewsUseCase(category).collect { handleResult(it) }
             setLoading(false)
         }
     }
