@@ -41,4 +41,11 @@ class LocalDataSource(
             bookmarkList.map { mapper.mapBookmarkToDomain(it) }
         }
     }
+
+    override fun checkNewsIfBookmarked(news: List<Article>) {
+        news.forEach {
+            if (bookmarksDao.findBookmark(it.title) != 0)
+                it.isBookmarked = true
+        }
+    }
 }

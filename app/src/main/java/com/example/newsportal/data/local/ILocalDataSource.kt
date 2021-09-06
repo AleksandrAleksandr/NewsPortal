@@ -16,4 +16,6 @@ interface ILocalDataSource {
     fun deleteBookmark(article: Article)
 
     fun getBookmarks(): Flow<List<Article>>
+
+    fun checkNewsIfBookmarked(news: List<Article>)
 }

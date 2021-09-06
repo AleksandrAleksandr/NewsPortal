@@ -13,7 +13,7 @@
     <string name="three_dots">⋮</string>
     <string name="choose_browser">Choose browser</string>
     <string name="unknown_author">Author: unknown</string>
-    <string name="you_haven_t_added_any_bookmarks">You haven not added any bookmarks</string>
+    <string name="you_have_not_added_any_bookmarks">You have not added any bookmarks</string>
 
     <string-array name="categories">
         <item>business</item>

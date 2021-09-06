@@ -17,6 +17,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/you_haven_t_added_any_bookmarks" />
+        android:text="@string/you_have_not_added_any_bookmarks" />
 
 </FrameLayout>
