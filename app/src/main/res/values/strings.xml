@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">NewsPortal</string>
+    <string name="date_range">%1$s - %2$s</string>
+    <string name="search_view_hint">enter a phrase</string>
+    <string name="search">Search</string>
+    <string name="hot_news">Hot News</string>
+    <string name="go_to_browser">Go to browser</string>
+    <string name="author_template">Author: %s</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="add_to_bookmarks">Add to bookmarks</string>
+    <string name="remove_to_bookmarks">Remove from bookmarks</string>
+    <string name="view_in_browser">View in browser</string>
+    <string name="choose_browser">Choose browser</string>
+    <string name="unknown_author">Author: unknown</string>
+    <string name="you_have_not_added_any_bookmarks">You have not added any bookmarks</string>
+
+    <string-array name="categories">
+        <item>business</item>
+        <item>entertainment</item>
+        <item>general</item>
+        <item>health</item>
+        <item>science</item>
+        <item>sports</item>
+        <item>technology</item>
+    </string-array>
 </resources>

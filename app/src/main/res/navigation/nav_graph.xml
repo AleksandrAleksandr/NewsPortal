@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/topNewsFragment">
+
+    <fragment
+        android:id="@+id/topNewsFragment"
+        android:name="com.example.newsportal.app.topnews.TopNewsFragment"
+        android:label="TopNewsFragment" />
+    <fragment
+        android:id="@+id/searchNewsFragment"
+        android:name="com.example.newsportal.app.search.SearchNewsFragment"
+        android:label="SearchNewsFragment" />
+    <fragment
+        android:id="@+id/bookmarksFragment"
+        android:name="com.example.newsportal.app.bookmarks.BookmarksFragment"
+        android:label="BookmarksFragment" />
+</navigation>

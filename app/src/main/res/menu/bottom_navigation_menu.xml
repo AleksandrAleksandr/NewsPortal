@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/topNewsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_newspaper"
+        android:title="@string/hot_news" />
+    <item
+        android:id="@+id/searchNewsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search" />
+    <item
+        android:id="@+id/bookmarksFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_bookmark"
+        android:title="@string/bookmarks" />
+</menu>
