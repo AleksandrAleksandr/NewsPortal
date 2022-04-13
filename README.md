@@ -1,15 +1,15 @@
-News Application
+# News Application
 
-Functionality:
+#### Functionality:
 - Show top news by categories
 - Search news, filtered by date
 - Detailed news
 - Bookmarks functionality
 
-Architecture: 
+#### Architecture: 
 - Clean Architcture + MVVM
 
-Used:
+#### Used:
 - Kotlin
 - Retrofit
 - Architecture components – LiveData, ViewModel
